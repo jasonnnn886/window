@@ -1,0 +1,16 @@
+# 排除临时Excel文件
+~$*.xlsx
+
+# 排除IDE相关文件
+.idea/
+.vscode/
+
+# 排除Python缓存文件
+__pycache__/
+*.py[cod]
+
+# 排除数据库文件
+*.sqlite3
+
+# 排除静态文件
+/static/
