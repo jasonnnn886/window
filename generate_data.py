@@ -2,15 +2,15 @@ import pandas as pd
 from datetime import datetime, timedelta
 import random
 from faker import Faker
+import argparse
 
 # 初始化Faker中文本地化
-fake = Faker('zh_CN')
+fake = Faker('zh_TW')
 
 daily_products = [
-    '洗衣液', '卫生纸', '洗发水', '沐浴露', '牙膏',
-    '洗洁精', '垃圾袋', '保鲜膜', '厨房纸巾', '洗衣粉'
+    '洗衣液', '衛生紙', '洗髮水', '沐浴露', '牙膏',
+    '洗潔精', '垃圾袋', '保鮮膜', '廚房紙巾', '洗衣粉'
 ]
-
 # 生成产品数据
 def generate_products(num_products=10):
     products = []
@@ -61,7 +61,7 @@ def generate_orders(products_df, customers_df, num_orders=20):
     return pd.DataFrame(orders)
 
 # 生成示例数据并保存到Excel文件
-def generate_sample_data(output_file='sample_data.xlsx'):
+def generate_sample_data(output_file='ex9.xlsx'):
     # 生成数据
     products_df = generate_products()
     customers_df = generate_customers()
@@ -72,7 +72,11 @@ def generate_sample_data(output_file='sample_data.xlsx'):
         products_df.to_excel(writer, sheet_name='products', index=False)
         customers_df.to_excel(writer, sheet_name='customers', index=False)
         orders_df.to_excel(writer, sheet_name='orders', index=False)
-
+    return output_file
 if __name__ == '__main__':
-    generate_sample_data()
-    print('示例数据已生成到sample_data.xlsx文件中')
+    # 解析命令行参数
+    parser = argparse.ArgumentParser(description='生成示例数据')
+    parser.add_argument('--output', type=str, default='ex9.xlsx', help='输出文件名')
+    args = parser.parse_args()
+    data=generate_sample_data(output_file=args.output)
+    print(f'示例数据已生成到文件中{data}')
